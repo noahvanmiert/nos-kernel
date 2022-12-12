@@ -5,15 +5,34 @@
 
 BOOT = Boot
 BUILD = Build
+KERNEL = Kernel
+
+# NASM
 ASM = nasm
 ASM_FLAGS = -f bin
 
+# GCC
+CC = i386-elf-gcc
+CC_FLAGS = -ffreestanding -m32 -g
 
-all: $(BUILD) $(BUILD)/boot.bin
+# LD
+LD = i386-elf-ld 
+LD_FLAGS = --oformat binary
 
 
-$(BUILD)/boot.bin: $(BOOT)/boot.asm
-	$(ASM) $(ASM_FLAGS) $^ -o $@
+all: $(BUILD) $(BUILD)/kernel.o $(BUILD)/boot.bin
+
+
+$(BUILD)/kernel.o: $(KERNEL)/kernel.c
+	$(CC) $(CC_FLAGS) -c Kernel/kernel.c -o $(BUILD)/kernel.o
+
+$(BUILD)/boot.bin: $(BOOT)/boot.asm $(BOOT)/kernel_entry.asm $(BUILD)/kernel.o
+	$(ASM) -felf $(BOOT)/kernel_entry.asm -o $(BUILD)/kernel_entry.o
+	$(LD) -o $(BUILD)/nos_kernel.bin -Ttext 0x1000 $(BUILD)/kernel_entry.o $(BUILD)/kernel.o $(LD_FLAGS)
+	$(ASM) $(ASM_FLAGS) $(BOOT)/boot.asm -o $(BUILD)/boot.bin
+
+	cat $(BUILD)/boot.bin $(BUILD)/nos_kernel.bin > $(BUILD)/nos_tmp.bin
+	cat $(BUILD)/nos_tmp.bin $(BOOT)/zero.bin > $(BUILD)/nos.bin
 
 
 $(BUILD):
@@ -21,7 +40,7 @@ $(BUILD):
 
 
 run:
-	qemu-system-x86_64 $(BUILD)/boot.bin
+	qemu-system-x86_64 -drive format=raw,file="$(BUILD)/nos.bin",index=0,if=floppy, -m 512M
 
 
 clean:
