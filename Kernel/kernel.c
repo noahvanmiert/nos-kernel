@@ -8,12 +8,13 @@
 */
 
 #include "Lib/stdio.h"
+#include "Idt/idt.h"
 #include "kpanic.h"
 
 
 extern void main() {
+    idt_init();
     k_io_init();
 
-    kputs("Hello, World!?123456789010\n");
-    kpanic("Invalid read!");
+    kputs("Welcome to nos-os!\n");
 }

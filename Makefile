@@ -25,8 +25,7 @@ SOURCES = $(wildcard $(KERNEL)/*.c $(KERNEL)/**/*.c $(KERNEL)/**/**/*.c)
 OBJECTS = $(SOURCES:.c=.o)
 
 
-all: $(BUILD) $(BUILD)/kernel.o $(BUILD)/vga_driver.o  $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(BUILD)/boot.bin
-
+all: $(BUILD) $(BUILD)/kernel.o $(BUILD)/vga_driver.o  $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(BUILD)/idt.o $(BUILD)/idta.o $(BUILD)/boot.bin
 
 $(BUILD)/kernel.o: $(KERNEL_FILES)
 	$(CC) $(CC_FLAGS) -c Kernel/kernel.c -o $(BUILD)/kernel.o
@@ -47,10 +46,15 @@ $(BUILD)/stdio.o: $(KERNEL_FILES)
 $(BUILD)/kpanic.o: $(KERNEL_FILES)
 	$(CC) $(CC_FLAGS) -c Kernel/kpanic.c -o $(BUILD)/kpanic.o
 
+$(BUILD)/idt.o: $(KERNEL_FILES)
+	$(CC) $(CC_FLAGS) -c $(KERNEL)/Idt/idt.c -o $(BUILD)/idt.o
+
+$(BUILD)/idta.o: $(KERNEL_FILES)
+	$(ASM) -felf $(KERNEL)/Idt/idt.asm -o $(BUILD)/idta.o
 
 $(BUILD)/boot.bin: $(BOOT)/boot.asm $(BOOT)/kernel_entry.asm $(OBJECTS)
 	$(ASM) -felf $(BOOT)/kernel_entry.asm -o $(BUILD)/kernel_entry.o
-	$(LD) -o $(BUILD)/nos_kernel.bin -Ttext 0x1000 $(BUILD)/kernel_entry.o $(BUILD)/kernel.o $(BUILD)/vga_driver.o $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(LD_FLAGS)
+	$(LD) -o $(BUILD)/nos_kernel.bin -Ttext 0x1000 $(BUILD)/kernel_entry.o $(BUILD)/kernel.o $(BUILD)/idta.o $(BUILD)/idt.o $(BUILD)/vga_driver.o $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(LD_FLAGS)
 	$(ASM) $(ASM_FLAGS) $(BOOT)/boot.asm -o $(BUILD)/boot.bin
 
 	cat $(BUILD)/boot.bin $(BUILD)/nos_kernel.bin > $(BUILD)/nos_tmp.bin
