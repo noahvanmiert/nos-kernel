@@ -8,9 +8,12 @@
 */
 
 #include "Lib/stdio.h"
+#include "kpanic.h"
+
 
 extern void main() {
     k_io_init();
 
     kputs("Hello, World!?123456789010\n");
+    kpanic("Invalid read!");
 }
