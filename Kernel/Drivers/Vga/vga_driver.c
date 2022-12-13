@@ -12,6 +12,8 @@
 #include "../../Lib/string.h"
 #include "../../Lib/stddef.h"
 
+extern void outb(uint16_t port, uint8_t value);
+extern uint8_t inb(uint16_t port);
 
 /*
     create_color_code() - Generates a colorcode from a given
@@ -150,13 +152,27 @@ void vga_write_char(struct VgaWriter *writer, char chr)
         vga_newline(writer);
 
     /*
+        For now we will just clear the screen when it's
+        full.
+    */
+    if (writer->col >= VGA_BUFFER_WIDTH && writer->row >= VGA_BUFFER_HEIGHT)
+        vga_clear(writer);
+
+    uint16_t pos = writer->col + (writer->row * 80);
+
+    /*
         Now write the character to the video memory
         located at 0xb8000.
     */
-    writer->buffer->chars[writer->col + (writer->row * 80)] = (struct VgaChar) {
+    writer->buffer->chars[pos] = (struct VgaChar) {
         .chr = chr,
         .color_code = writer->color_code
     };
+
+    outb(0x3d4, 0x0f);
+    outb(0x3d5, (uint8_t) (pos & 0xff));
+    outb(0x3d4, 0x0e);
+    outb(0x3d5, (uint8_t) ((pos >> 8) & 0xff));
 
     writer->col += 1;
 }

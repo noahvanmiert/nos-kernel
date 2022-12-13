@@ -13,7 +13,7 @@
 
 #include "../../Lib/stdint.h"
 
-#define VGA_MEMORY      (char *)0xb8000
+#define VGA_MEMORY        (char *) 0xb8000
 
 #define VGA_BUFFER_WIDTH  80
 #define VGA_BUFFER_HEIGHT 25
