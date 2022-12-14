@@ -9,17 +9,19 @@
 */
 
 #include "vga_driver.h"
-#include "../../Lib/string.h"
-#include "../../Lib/stddef.h"
+#include "../../lib/string.h"
+#include "../../lib/stddef.h"
+
 
 extern void outb(uint16_t port, uint8_t value);
 extern uint8_t inb(uint16_t port);
+
 
 /*
     create_color_code() - Generates a colorcode from a given
     foreground and background.
 */
-__inline__ uint8_t vga_create_color_code(enum VgaColor foreground, enum VgaColor background)
+inline uint8_t vga_create_color_code(enum VgaColor foreground, enum VgaColor background)
 {
     return ((uint8_t) background << 4) | (uint8_t) foreground;
 }
@@ -73,7 +75,7 @@ void vga_newline(struct VgaWriter *writer)
     it prints the next character 4 spaces 
     from the location it is now.
 */
-__inline__ void vga_tab(struct VgaWriter *writer)
+inline void vga_tab(struct VgaWriter *writer)
 {
     writer->col += 4;
 }

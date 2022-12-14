@@ -46,7 +46,7 @@ enter_pm:
     mov cr0, eax
     jmp seg_code:pm_main
 
-%include "Boot/gdt.asm"
+%include "boot/gdt.asm"
 
 [bits 32]
 pm_main:

@@ -22,13 +22,4 @@ typedef uint64_t size_t;
 
 typedef unsigned long uintptr_t;
 
-typedef int8_t bool_t;
-
-#ifndef NULL
-#define NULL ((void *) 0)
-#endif
-
-#define true 1
-#define false 0
-
 #endif // __STDINT_H_

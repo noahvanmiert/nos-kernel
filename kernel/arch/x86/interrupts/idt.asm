@@ -1,7 +1,13 @@
+;   Made by Noah Van Miert
+;   13/12/2022
+;
+;   NOS-KERNEL
+
+
 [bits 32]
 
-global idt_load
-idt_load:
+global x86_idt_load
+x86_idt_load:
     ; Make call frame
     push ebp
     mov ebp, esp

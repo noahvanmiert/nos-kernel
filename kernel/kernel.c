@@ -7,14 +7,19 @@
     This file containts the entry point for the kernel.
 */
 
-#include "Lib/stdio.h"
-#include "Idt/idt.h"
+#include "lib/stdio.h"
+#include "arch/x86/interrupts/idt.h"
+#include "arch/x86/interrupts/isr.h"
 #include "kpanic.h"
 
 
 extern void main() {
-    idt_init();
+    /*
+        Initialize the kernel.
+    */
     k_io_init();
-
+    x86_idt_init();
+    x86_isr_init();
+    
     kputs("Welcome to nos-os!\n");
 }

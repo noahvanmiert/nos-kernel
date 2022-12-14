@@ -1,7 +1,7 @@
 #include "kpanic.h"
 
-#include "Drivers/Vga/vga_driver.h"
-#include "Lib/stdio.h"
+#include "drivers/vga/vga_driver.h"
+#include "lib/stdio.h"
 
 /*
     kpanic() - Panics the kernel.
@@ -20,9 +20,12 @@ void kpanic(const char *msg)
     vga_write_string(&writer, "KERNEL PANICKED: ");
     vga_write_string(&writer, msg);
 
-    // Disables the flashing cursor
+    /*
+        Disables the flashing cursor.
+    */
     outb(0x3D4, 0x0A);
 	outb(0x3D5, 0x20);
 
+    /* Just freeze the pc */
     for(;;);
 }

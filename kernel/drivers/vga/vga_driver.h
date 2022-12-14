@@ -11,7 +11,7 @@
 #ifndef __VGA_DRIVER_H_
 #define __VGA_DRIVER_H_
 
-#include "../../Lib/stdint.h"
+#include "../../lib/stdint.h"
 
 #define VGA_MEMORY        (char *) 0xb8000
 

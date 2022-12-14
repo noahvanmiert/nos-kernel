@@ -1,4 +1,13 @@
+/*
+    Made by Noah Van Miert
+    13/12/2022
+
+    NOS-KERNEL
+*/
+
+
 #include "idt.h"
+#include "../../../lib/stddef.h"
 
 struct IDT_Entry {
     uint16_t base_low;
@@ -6,21 +15,22 @@ struct IDT_Entry {
     uint8_t reserved;
     uint8_t flags;
     uint16_t base_high;
-} __attribute__((packed));
+} __PACKED__;
 
 
 struct IDT_Discriptor {
     uint16_t limit;
     struct IDT_Entry *ptr;
-} __attribute__((packed));
+} __PACKED__;
 
 
 struct IDT_Entry g_IDT[256];
 struct IDT_Discriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
 
-extern void __attribute__((cdecl)) idt_load(struct IDT_Discriptor *idt_discriptor);
+extern void __CDECL__ x86_idt_load(struct IDT_Discriptor *idt_discriptor);
 
-void idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, uint8_t flags)
+
+void x86_idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, uint8_t flags)
 {
     g_IDT[interrupt].base_low = ((uint32_t) base) & 0xffff;
     g_IDT[interrupt].segment_selector = segment_descriptor;
@@ -29,20 +39,24 @@ void idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, u
     g_IDT[interrupt].base_high = ((uint32_t) base >> 16) & 0xffff;
 }
 
+
 #define SET_FLAG(num, flag)    num |= (flag)
 #define UNSET_FLAG(num, flag)  num &= ~(flag)
 
-void idt_enable_gate(int interrupt)
+
+void x86_idt_enable_gate(int interrupt)
 {
     SET_FLAG(g_IDT[interrupt].flags, IDT_FLAG_PRESENT);
 }
 
-void idt_disable_gate(int interrupt)
+
+void x86_idt_disable_gate(int interrupt)
 {
     UNSET_FLAG(g_IDT[interrupt].flags, IDT_FLAG_PRESENT);
 }
 
-void idt_init()
+
+void x86_idt_init()
 {
-    idt_load(&g_IDTDescriptor);
+    x86_idt_load(&g_IDTDescriptor);
 }
