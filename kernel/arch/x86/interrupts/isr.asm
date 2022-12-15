@@ -158,6 +158,14 @@ x86_isr17:
     jmp x86_isr_common
 
 
+x86_isr18:
+    cli
+    push byte 0
+    push byte 18
+    jmp x86_isr_common
+
+
+
 x86_isr19:
     cli
     push byte 0

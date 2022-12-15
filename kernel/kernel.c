@@ -21,5 +21,7 @@ extern void main() {
     x86_idt_init();
     x86_isr_init();
     
+    asm("int $0x17");
+
     kputs("Welcome to nos-os!\n");
 }
