@@ -94,7 +94,7 @@ void x86_isr_init()
 }
 
 
-void __CDECL__ isr_handler()
+void isr_handler()
 {
     kputs("INTERRUPTED!\n");
 }

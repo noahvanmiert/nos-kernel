@@ -20,7 +20,7 @@ struct x86_IdtEntry {
 
 struct x86_IdtDiscriptor {
     uint16_t limit;
-    struct IDT_Entry *ptr;
+    struct x86_IdtEntry *ptr;
 } __PACKED__;
 
 
