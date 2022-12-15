@@ -50,6 +50,10 @@ extern void x86_isr32();
 
 void x86_isr_init()
 {
+    /*
+        We need to set the gate for every
+        interrupt manualy.
+    */
     x86_idt_set_gate(0, x86_isr0, 0x08, 0x8e);
     x86_idt_set_gate(1, x86_isr1, 0x08, 0x8e);
     x86_idt_set_gate(2, x86_isr2, 0x08, 0x8e);
@@ -92,7 +96,5 @@ void x86_isr_init()
 
 void __CDECL__ isr_handler()
 {
-    //kpanic("an error occurred");
-
-    kputs("INTERRUPTED!");
+    kputs("INTERRUPTED!\n");
 }

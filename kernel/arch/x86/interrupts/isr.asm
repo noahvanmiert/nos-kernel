@@ -264,6 +264,9 @@ x86_isr32:
     jmp x86_isr_common
 
 
+;   This function will handle the interrupt
+;   by calling isr_handler(), this function is defined
+;   in the isr.c file
 x86_isr_common:
     pusha           ; pushed edi, esi, esp, ebx, edx, ecx, eax
 

@@ -13,9 +13,9 @@
 #include "../../../lib/stddef.h"
 
 /*
-    Is not used now
+    Is not used for now
 */
-struct Registers {
+struct x86_Registers {
     uint32_t gs, fs, es, ds;
     uint32_t edi, esi, ebp, kern_esp, ebx, edx, ecx, eax;
     uint32_t interrupt, error;

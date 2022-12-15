@@ -6,6 +6,9 @@
 
 [bits 32]
 
+;   This function loads the 
+;   IDT (Interrupt Discriptor Table)
+;   into the idt register.
 global x86_idt_load
 x86_idt_load:
     ; Make call frame

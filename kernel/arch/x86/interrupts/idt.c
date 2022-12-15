@@ -9,7 +9,7 @@
 #include "idt.h"
 #include "../../../lib/stddef.h"
 
-struct IDT_Entry {
+struct x86_IdtEntry {
     uint16_t base_low;
     uint16_t segment_selector;
     uint8_t reserved;
@@ -18,16 +18,16 @@ struct IDT_Entry {
 } __PACKED__;
 
 
-struct IDT_Discriptor {
+struct x86_IdtDiscriptor {
     uint16_t limit;
     struct IDT_Entry *ptr;
 } __PACKED__;
 
 
-struct IDT_Entry g_IDT[256];
-struct IDT_Discriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
+struct x86_IdtEntry g_IDT[256];
+struct x86_IdtDiscriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
 
-extern void __CDECL__ x86_idt_load(struct IDT_Discriptor *idt_discriptor);
+extern void __CDECL__ x86_idt_load(struct x86_IdtDiscriptor *idt_discriptor);
 
 
 void x86_idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, uint8_t flags)
