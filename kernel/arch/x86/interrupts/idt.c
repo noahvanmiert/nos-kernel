@@ -9,6 +9,7 @@
 #include "idt.h"
 #include "../../../lib/stddef.h"
 
+
 struct x86_IdtEntry {
     uint16_t base_low;
     uint16_t segment_selector;

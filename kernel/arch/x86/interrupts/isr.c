@@ -45,7 +45,6 @@ extern void x86_isr28();
 extern void x86_isr29();
 extern void x86_isr30();
 extern void x86_isr31();
-extern void x86_isr32();
 
 
 void x86_isr_init()
@@ -86,7 +85,6 @@ void x86_isr_init()
     x86_idt_set_gate(29, x86_isr29, 0x08, 0x8e);
     x86_idt_set_gate(30, x86_isr30, 0x08, 0x8e);
     x86_idt_set_gate(31, x86_isr31, 0x08, 0x8e);
-    x86_idt_set_gate(32, x86_isr32, 0x08, 0x8e);
 
     /* Enable all idt gates */
     for (int i = 0; i < 256; i++)

@@ -41,7 +41,6 @@ global x86_isr28
 global x86_isr29
 global x86_isr30
 global x86_isr31
-global x86_isr32
 
 
 ; This is repeated for every interrupt
@@ -254,13 +253,6 @@ x86_isr31:
     cli
     push byte 0
     push byte 31
-    jmp x86_isr_common
-
-
-x86_isr32:
-    cli
-    push byte 0
-    push byte 32
     jmp x86_isr_common
 
 

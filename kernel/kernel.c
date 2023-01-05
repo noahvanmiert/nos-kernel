@@ -12,14 +12,21 @@
 #include "arch/x86/interrupts/isr.h"
 #include "kpanic.h"
 
+static char verbose_mode = true;
 
-extern void main() {
-    /*
-        Initialize the kernel.
-    */
+static void _kernel_init() 
+{
     k_io_init();
     x86_idt_init();
     x86_isr_init();
+    
+    if (verbose_mode)
+        kputs("kernel initialisation: OK\n");
+}
+
+
+extern void main() {
+    _kernel_init();
     
     asm("int $0x17");
 
