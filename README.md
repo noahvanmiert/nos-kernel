@@ -9,7 +9,6 @@ so I've no idea were this will end.
 I'm planning to make the kernel in C, cause I like it and I think it's 
 the best for low level system programming. I will use nasm as the assembler.
 
----
 
 # Goals
 
