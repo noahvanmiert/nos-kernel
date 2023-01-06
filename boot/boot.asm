@@ -20,7 +20,7 @@ rm_main:
     mov bx, kernel_loc
     
     ; The amount of sectors we want to read
-    ; I think should be enough
+    ; I think 50 should be enough
     mov dh, 50
 
     mov ah, 0x02

@@ -1,0 +1,26 @@
+Here's a high-level overview of how hardware interrupts work:
+
+A hardware device or component generates an interrupt request (IRQ) signal. This signal is typically sent
+to a hardware interrupt controller, such as a Programmable Interrupt Controller (PIC), which routes 
+the request to the appropriate interrupt handler in the kernel.
+
+The kernel's interrupt handler is called to handle the interrupt. 
+The handler determines the source of the interrupt and takes any 
+necessary actions, such as servicing the device or handling a hardware 
+exception.
+
+While the interrupt handler is running, the kernel saves 
+the current state of the interrupted process and disables further 
+interrupts to prevent multiple interrupts from occurring simultaneously.
+
+After the interrupt handler has completed its tasks,
+the kernel restores the state of the interrupted process and re-enables interrupts.
+
+Control is returned to the interrupted process, which resumes execution.
+
+To write a driver for a PIC, you will need to:
+
+1) Identify the specific PIC that you are using and familiarize yourself with its documentation and programming interface.
+2) Determine what functions you want your driver to perform, such as initializing the PIC, setting up interrupt handlers, and masking/unmasking interrupts.
+3) Implement these functions in your driver code, taking into account any specific details or considerations for the particular PIC you are using.
+4) Test your driver to ensure that it is working correctly and performing the desired functions.
