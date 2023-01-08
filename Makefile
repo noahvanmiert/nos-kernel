@@ -15,24 +15,32 @@ BOOT = boot
 BUILD = build
 KERNEL = kernel
 
-KERNEL_MACROS = -D _KERNEL_VERBOSE_MODE 
+
+KERNEL_MACROS = -D _KERNEL_VERBOSE_MODE
+
 
 # NASM
 ASM = nasm
 ASM_FLAGS = -f bin
 
+
 # GCC
 CC = /usr/local/i386elfgcc/bin/i386-elf-gcc
 CC_FLAGS = -ffreestanding -m32 -g -Wall -Wextra -Werror -pedantic $(KERNEL_MACROS)
+
 
 # LD
 LD = /usr/local/i386elfgcc/bin/i386-elf-ld 
 LD_FLAGS = --oformat binary
 
+
 SOURCES = $(wildcard $(KERNEL)/*.c $(KERNEL)/**/*.c $(KERNEL)/**/**/*.c $(KERNEL)/**/**/**/*.c)
 OBJECTS = $(SOURCES:.c=.o)
 
+
+# Qemu Variables
 QEMU_MEMORY_SIZE = 512M
+
 
 X86_INTERRUPTS = $(KERNEL)/arch/x86/interrupts
 

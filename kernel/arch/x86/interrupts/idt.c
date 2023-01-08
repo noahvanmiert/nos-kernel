@@ -28,7 +28,7 @@ struct x86_IdtDiscriptor {
 struct x86_IdtEntry g_IDT[256];
 struct x86_IdtDiscriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
 
-extern void __CDECL__ x86_idt_load(struct x86_IdtDiscriptor *idt_discriptor);
+extern void x86_idt_load(struct x86_IdtDiscriptor *idt_discriptor);
 
 
 void x86_idt_set_gate(uint32_t interrupt, void (*base)(), uint16_t segment_descriptor, uint8_t flags)

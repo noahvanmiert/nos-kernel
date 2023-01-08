@@ -86,7 +86,7 @@ void x86_isr_init()
     x86_idt_set_gate(30, x86_isr30, 0x08, 0x8e);
     x86_idt_set_gate(31, x86_isr31, 0x08, 0x8e);
 
-    /* Enable all idt gates */
+
     for (int i = 0; i < 256; i++)
         x86_idt_enable_gate(i);
 }
@@ -115,11 +115,10 @@ static const char *int_errors[] = {
 };
 
 
-void __CDECL__ isr_handler(struct x86_Registers regs)
+void isr_handler(struct x86_Registers regs)
 {
-	if (regs.interrupt < 18) {
+	if (regs.interrupt < 18)
 		kpanic(int_errors[regs.interrupt]);
-	}
 	
-    // kputs("INTERRUPTED!\n");
+	/* If the interrupt is not an exception just do nothing */
 }

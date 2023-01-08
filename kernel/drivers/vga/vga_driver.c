@@ -48,9 +48,8 @@ void vga_reset(struct VgaWriter *writer)
 void vga_clear(struct VgaWriter *writer)
 {
     for (size_t i = 0; i < VGA_BUFFER_HEIGHT; i++) {
-        for (size_t j = 0; j < VGA_BUFFER_WIDTH; j++) {
+        for (size_t j = 0; j < VGA_BUFFER_WIDTH; j++)
             vga_write_char_at(writer, j, i, ' ');
-        }
     }
 
     writer->col = 0;

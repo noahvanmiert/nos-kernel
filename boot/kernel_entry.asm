@@ -9,6 +9,6 @@
 global _start
 _start:
     ; Call the main function
-    ; defined in Kernel/kernel.c
+    ; defined in kernel/kernel.c
     call main
     jmp $
