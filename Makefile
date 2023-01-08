@@ -1,7 +1,5 @@
 # Made by Noah Van Miert
 # 12/12/2022
-#
-# I know this is a mess.
 # 
 # NOS-KERNEL
 #
@@ -11,8 +9,8 @@
 # $^ -> Dependencies
 
 
-BOOT = boot
-BUILD = build
+BOOT   = boot
+BUILD  = build
 KERNEL = kernel
 
 
@@ -20,17 +18,17 @@ KERNEL_MACROS = -D _KERNEL_VERBOSE_MODE
 
 
 # NASM
-ASM = nasm
+ASM       = nasm
 ASM_FLAGS = -f bin
 
 
 # GCC
-CC = /usr/local/i386elfgcc/bin/i386-elf-gcc
-CC_FLAGS = -ffreestanding -m32 -g -Wall -Wextra -Werror -pedantic $(KERNEL_MACROS)
+CC       = /usr/local/i386elfgcc/bin/i386-elf-gcc
+CC_FLAGS = -ffreestanding -m32 -g -Wall -Wextra -Werror -pedantic -std=c11 $(KERNEL_MACROS)
 
 
 # LD
-LD = /usr/local/i386elfgcc/bin/i386-elf-ld 
+LD       = /usr/local/i386elfgcc/bin/i386-elf-ld 
 LD_FLAGS = --oformat binary
 
 
@@ -92,7 +90,7 @@ $(BUILD)/boot.bin: $(BOOT)/boot.asm $(BOOT)/kernel_entry.asm $(OBJECTS)
 	$(LD) -o $(BUILD)/nos_kernel.bin -Ttext 0x1000 $(BUILD)/kernel_entry.o $(KERNEL_OBJ_FILES) $(LD_FLAGS)
 	$(ASM) $(ASM_FLAGS) $(BOOT)/boot.asm -o $@
 
-	cat $(BUILD)/boot.bin $(BUILD)/nos_kernel.bin > $(BUILD)/nos_tmp.bin
+	cat $@ $(BUILD)/nos_kernel.bin > $(BUILD)/nos_tmp.bin
 	cat $(BUILD)/nos_tmp.bin $(BOOT)/zero.bin > $(BUILD)/nos.bin
 
 

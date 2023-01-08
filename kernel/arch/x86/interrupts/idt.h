@@ -11,6 +11,7 @@
 
 #include "../../../lib/stdint.h"
 
+
 enum IDT_Flags {
     IDT_FLAG_GATE_TAKS          = 0x5,
     IDT_FLAG_GATE_16BIT_INT     = 0x6,
@@ -25,6 +26,7 @@ enum IDT_Flags {
 
     IDT_FLAG_PRESENT            = 0x80
 };
+
 
 void x86_idt_init();
 void x86_idt_disable_gate(int interrupt);

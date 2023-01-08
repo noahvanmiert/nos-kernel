@@ -26,6 +26,5 @@ void kpanic(const char *msg)
     outb(0x3D4, 0x0A);
 	outb(0x3D5, 0x20);
 
-    /* Just freeze the pc */
     for(;;);
 }

@@ -25,8 +25,8 @@ struct x86_IdtDiscriptor {
 } __PACKED__;
 
 
-struct x86_IdtEntry g_IDT[256];
-struct x86_IdtDiscriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
+static struct x86_IdtEntry g_IDT[256];
+static struct x86_IdtDiscriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
 
 extern void x86_idt_load(struct x86_IdtDiscriptor *idt_discriptor);
 

@@ -74,7 +74,7 @@ void vga_newline(struct VgaWriter *writer)
     it prints the next character 4 spaces 
     from the location it is now.
 */
-inline void vga_tab(struct VgaWriter *writer)
+void vga_tab(struct VgaWriter *writer)
 {
     writer->col += 4;
 }
@@ -185,10 +185,6 @@ void vga_write_char(struct VgaWriter *writer, char chr)
 */
 void vga_write_string(struct VgaWriter *writer, const char *str)
 {   
-    /*
-        Just go trough every character 
-        and print it.
-    */
     for (size_t i = 0; i < strlen(str); i++)
         vga_write_char(writer, str[i]);
 }
