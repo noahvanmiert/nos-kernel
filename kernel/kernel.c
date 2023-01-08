@@ -12,7 +12,7 @@
 #include "arch/x86/interrupts/isr.h"
 #include "kpanic.h"
 
-static char verbose_mode = true;
+// #define _KERNEL_VERBOSE_MODE 1
 
 static void _kernel_init() 
 {
@@ -20,15 +20,16 @@ static void _kernel_init()
     x86_idt_init();
     x86_isr_init();
     
-    if (verbose_mode)
-        kputs("kernel initialisation: OK\n");
+#if _KERNEL_VERBOSE_MODE
+    kputs("kernel initialisation: OK\n");
+#endif
 }
 
 
-extern void main() {
+extern int main() {
     _kernel_init();
     
-    asm("int $0x17");
-
     kputs("Welcome to nos-os!\n");
+
+	return 0;
 }

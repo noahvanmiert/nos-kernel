@@ -29,6 +29,6 @@ enum IDT_Flags {
 void x86_idt_init();
 void x86_idt_disable_gate(int interrupt);
 void x86_idt_enable_gate(int interrupt);
-void x86_idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, uint8_t flags);
+void x86_idt_set_gate(uint32_t interrupt, void (*base)(), uint16_t segment_descriptor, uint8_t flags);
 
 #endif // __IDT_H_

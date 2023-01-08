@@ -31,7 +31,7 @@ struct x86_IdtDiscriptor g_IDTDescriptor = { sizeof(g_IDT) - 1, g_IDT };
 extern void __CDECL__ x86_idt_load(struct x86_IdtDiscriptor *idt_discriptor);
 
 
-void x86_idt_set_gate(uint32_t interrupt, void *base, uint16_t segment_descriptor, uint8_t flags)
+void x86_idt_set_gate(uint32_t interrupt, void (*base)(), uint16_t segment_descriptor, uint8_t flags)
 {
     g_IDT[interrupt].base_low = ((uint32_t) base) & 0xffff;
     g_IDT[interrupt].segment_selector = segment_descriptor;

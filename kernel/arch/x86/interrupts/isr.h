@@ -15,12 +15,23 @@
 /*
     Is not used for now
 */
+
+/* 
 struct x86_Registers {
     uint32_t gs, fs, es, ds;
     uint32_t edi, esi, ebp, kern_esp, ebx, edx, ecx, eax;
     uint32_t interrupt, error;
     uint32_t eip, cs, eflags, esp, ss;
 } __PACKED__;
+*/
+
+struct x86_Registers {
+	uint32_t edi, esi, ebp, kern_esp, ebx, edx, ecx, eax;
+	uint32_t gs, fs, es, ds;
+	uint32_t eip, cs, interrupt, esp, ss;
+	uint32_t eflags, error;
+} __PACKED__;
+
 
 void x86_isr_init();
 

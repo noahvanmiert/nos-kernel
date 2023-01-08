@@ -273,9 +273,7 @@ x86_isr_common:
     mov fs, ax
     mov gs, ax
 
-
-    xor eax, eax
-    mov ax, ds
+	mov eax, esp
     push eax
 
     push esp        ; pass pointer to stack to C

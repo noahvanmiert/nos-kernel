@@ -92,7 +92,34 @@ void x86_isr_init()
 }
 
 
-void isr_handler()
+static const char *int_errors[] = {
+	"Division by 0",
+	"Single-Step interrupt (Debug)",
+	"Non Maskable Interrupt",
+	"Breakpoint",
+	"Overflow",
+	"Bound Range Exceeded",
+	"Invalid Opcode",
+	"Coprocessor Not Available",
+	"Double Fault",
+	"Coprocessor Segment Overrun",
+	"Invalid Task State Segment",
+	"Segment Not Present",
+	"Stack Segment Fault",
+	"General Protection Fault",
+	"Page Fault",
+	"Unkown Interrupt",
+	"Coprocessor Fault",
+	"Alignment Check",
+	"Machine Check"
+};
+
+
+void __CDECL__ isr_handler(struct x86_Registers regs)
 {
-    kputs("INTERRUPTED!\n");
+	if (regs.interrupt < 18) {
+		kpanic(int_errors[regs.interrupt]);
+	}
+	
+    // kputs("INTERRUPTED!\n");
 }

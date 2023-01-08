@@ -1,0 +1,6 @@
+build/
+
+kernel/*.o
+kernel/lib/*.o
+kernel/drivers/vga/*.o
+kernel/arch/x86/interrupts/*.o

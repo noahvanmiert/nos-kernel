@@ -14,7 +14,7 @@
 
 typedef signed char bool_t;
 
-enum {
+enum bool_value {
     false = 0,
     true = 1
 };
