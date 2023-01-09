@@ -1,11 +1,6 @@
 /*
-    Made by Noah Van Miert
-    12/12/2022
-
-    NOS-KERNEL
-
-    This file containts the declarations of
-    the vga driver functions.
+ *	Made by Noah Van Miert
+ *	12/12/2022
 */
 
 #ifndef __VGA_DRIVER_H_

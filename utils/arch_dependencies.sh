@@ -6,16 +6,22 @@ export PATH="$PREFIX/bin:$PATH"
 
 mkdir /tmp/src
 cd /tmp/src
+
 curl -O http://ftp.gnu.org/gnu/binutils/binutils-2.39.tar.gz
 tar xf binutils-2.39.tar.gz
+
 mkdir binutils-build
 cd binutils-build
+
 ../binutils-2.39/configure --target=$TARGET --enable-interwork --enable-multilib --disable-nls --disable-werror --prefix=$PREFIX 2>&1 | tee configure.log
 sudo make all install 2>&1 | tee make.log
 
 cd /tmp/src
+
 curl -O https://ftp.gnu.org/gnu/gcc/gcc-12.2.0/gcc-12.2.0.tar.gz
+
 tar xf gcc-12.2.0.tar.gz
+
 mkdir gcc-build
 cd gcc-build
 

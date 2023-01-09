@@ -1,10 +1,6 @@
 /*
-    Made by Noah Van Miert
-    12/12/2022
-
-    NOS-KERNEL
-
-    This file containts the entry point for the kernel.
+ *	Made by Noah Van Miert
+ *	12/12/2022
 */
 
 #include "kernel.h"

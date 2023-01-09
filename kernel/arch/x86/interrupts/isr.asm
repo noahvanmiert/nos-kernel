@@ -1,7 +1,5 @@
 ;   Made by Noah Van Miert
 ;   12/12/2022
-;
-;   NOS-KERNEL
 
 
 [bits 32]
@@ -51,11 +49,13 @@ x86_isr0:
     push byte 0
     jmp x86_isr_common
 
+
 x86_isr1:
     cli
     push byte 0
     push byte 1
     jmp x86_isr_common
+
 
 x86_isr2:
     cli
@@ -63,11 +63,13 @@ x86_isr2:
     push byte 2
     jmp x86_isr_common
 
+
 x86_isr3:
     cli
     push byte 0
     push byte 3
     jmp x86_isr_common
+
 
 x86_isr4:
     cli
@@ -75,11 +77,13 @@ x86_isr4:
     push byte 4
     jmp x86_isr_common
 
+
 x86_isr5:
     cli
     push byte 0
     push byte 5
     jmp x86_isr_common
+
 
 x86_isr6:
     cli
@@ -87,11 +91,13 @@ x86_isr6:
     push byte 6
     jmp x86_isr_common
 
+
 x86_isr7:
     cli
     push byte 0
     push byte 7
     jmp x86_isr_common
+
 
 x86_isr8:
     cli
@@ -162,7 +168,6 @@ x86_isr18:
     push byte 0
     push byte 18
     jmp x86_isr_common
-
 
 
 x86_isr19:
@@ -258,7 +263,7 @@ x86_isr31:
 
 ;   This function will handle the interrupt
 ;   by calling isr_handler(), this function is defined
-;   in the isr.c file
+;   in the kernel/arch/x86/interrupts/isr.c file
 x86_isr_common:
     pusha           ; pushed edi, esi, esp, ebx, edx, ecx, eax
 

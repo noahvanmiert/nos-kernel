@@ -1,10 +1,7 @@
 /*
-    Made by Noah Van Miert
-    12/12/2022
-
-    NOS-KERNEL
+ *	Made by Noah Van Miert
+ *	12/12/2022
 */
-
 
 #ifndef __STDIO_H_
 #define __STDIO_H_

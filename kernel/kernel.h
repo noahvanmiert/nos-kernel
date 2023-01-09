@@ -1,3 +1,8 @@
+/*
+ *	Made by Noah Van Miert
+ *	9/1/2023
+*/
+
 #ifndef __KERNEL_H_
 #define __KERNEL_H_
 

@@ -1,7 +1,6 @@
-; Made by Noah Van Miert
-; 12/12/2022
-; 
-; NOS-KERNEL
+;	Made by Noah Van Miert
+;	12/12/2022
+
 
 [org 0x7c00]         
 

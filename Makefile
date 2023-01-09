@@ -1,8 +1,5 @@
 # Made by Noah Van Miert
 # 12/12/2022
-# 
-# NOS-KERNEL
-#
 
 # Automatic Variables
 # $@ -> Target Name

@@ -1,14 +1,11 @@
 ;   Made by Noah Van Miert
 ;   13/12/2022
-;
-;   NOS-KERNEL
 
 
 [bits 32]
 
-;   This function loads the 
-;   IDT (Interrupt Discriptor Table)
-;   into the idt register.
+; loads the idt into the idt
+; register
 global x86_idt_load
 x86_idt_load:
     push ebp

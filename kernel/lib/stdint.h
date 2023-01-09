@@ -1,8 +1,6 @@
 /*
-    Made by Noah Van Miert
-    12/12/2022
-
-    NOS-KERNEL
+ *	Made by Noah Van Miert
+ *	12/12/2022
 */
 
 #ifndef __STDINT_H_
@@ -18,8 +16,8 @@ typedef unsigned short int uint16_t;
 typedef unsigned int       uint32_t;
 typedef unsigned long int  uint64_t;
 
-typedef uint64_t size_t;
+typedef uint64_t		   size_t;
 
-typedef unsigned long uintptr_t;
+typedef unsigned long	   uintptr_t;
 
 #endif // __STDINT_H_

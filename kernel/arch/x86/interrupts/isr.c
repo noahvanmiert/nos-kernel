@@ -1,8 +1,6 @@
 /*
-    Made by Noah Van Miert
-    14/12/2022
-
-    NOS-KERNEL
+ *	Made by Noah Van Miert
+ *	14/12/2022
 */
 
 

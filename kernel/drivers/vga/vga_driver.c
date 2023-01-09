@@ -1,12 +1,8 @@
 /*
-    Made by Noah Van Miert
-    12/12/2022
-
-    NOS-KERNEL
-
-    This file containts the definitions of the 
-    vga driver functions.
+ * Made by Noah Van Miert
+ * 12/12/2022
 */
+
 
 #include "vga_driver.h"
 #include "../../lib/string.h"

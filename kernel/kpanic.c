@@ -1,11 +1,14 @@
+/*
+ *	Made by Noah Van Miert 
+ *	13/12/2022
+*/
+
 #include "kpanic.h"
 
 #include "drivers/vga/vga_driver.h"
 #include "lib/stdio.h"
 
-/*
-    kpanic() - Panics the kernel.
-*/
+
 void kpanic(const char *msg) 
 {
     struct VgaWriter writer = (struct VgaWriter) {
