@@ -8,6 +8,7 @@
 # $@ -> Target Name
 # $^ -> Dependencies
 
+KERNEL_VERSION = 0.1.0
 
 BOOT   = boot
 BUILD  = build
@@ -32,6 +33,7 @@ LD       = /usr/local/i386elfgcc/bin/i386-elf-ld
 LD_FLAGS = --oformat binary
 
 
+# All the source and object file of the kernel
 SOURCES = $(wildcard $(KERNEL)/*.c $(KERNEL)/**/*.c $(KERNEL)/**/**/*.c $(KERNEL)/**/**/**/*.c)
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -49,40 +51,40 @@ KERNEL_OBJ_FILES = $(BUILD)/kernel.o $(BUILD)/isra.o $(BUILD)/isr.o $(BUILD)/vga
 all: $(BUILD) $(KERNEL_OBJ_FILES) $(BUILD)/boot.bin
 
 
-$(BUILD)/kernel.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(KERNEL)/kernel.c -o $@
+$(BUILD)/kernel.o: $(KERNEL)/kernel.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/isra.o: $(KERNEL_FILES)
-	$(ASM) -felf $(X86_INTERRUPTS)/isr.asm -o $@
+$(BUILD)/isra.o: $(X86_INTERRUPTS)/isr.asm
+	$(ASM) -felf $^ -o $@
 
 
-$(BUILD)/isr.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(X86_INTERRUPTS)/isr.c -o $@
+$(BUILD)/isr.o: $(X86_INTERRUPTS)/isr.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/vga_driver.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(KERNEL)/drivers/vga/vga_driver.c -o $@
+$(BUILD)/vga_driver.o: $(KERNEL)/drivers/vga/vga_driver.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/string.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(KERNEL)/lib/string.c -o $@
+$(BUILD)/string.o: $(KERNEL)/lib/string.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/stdio.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(KERNEL)/lib/stdio.c -o $@
+$(BUILD)/stdio.o: $(KERNEL)/lib/stdio.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/kpanic.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(KERNEL)/kpanic.c -o $@
+$(BUILD)/kpanic.o: $(KERNEL)/kpanic.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/idt.o: $(KERNEL_FILES)
-	$(CC) $(CC_FLAGS) -c $(X86_INTERRUPTS)/idt.c -o $@
+$(BUILD)/idt.o: $(X86_INTERRUPTS)/idt.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
 
 
-$(BUILD)/idta.o: $(KERNEL_FILES)
-	$(ASM) -felf $(X86_INTERRUPTS)/idt.asm -o $@
+$(BUILD)/idta.o: $(X86_INTERRUPTS)/idt.asm
+	$(ASM) -felf $^ -o $@
 
 
 $(BUILD)/boot.bin: $(BOOT)/boot.asm $(BOOT)/kernel_entry.asm $(OBJECTS)
@@ -99,7 +101,17 @@ $(BUILD):
 
 
 help:
-	python3 utils/help.py
+	@echo "make                   -    Compiles the kernel into a binary"
+	@echo "make run               -    Launch Qemu with the compiled kernel"
+	@echo "make clean             -    Remove all the build files"
+	@echo "make version           -    Prints the kernel version"
+	@echo ""
+	@echo "make install-debian    -    Install all the dependencies on debian-based platforms"
+	@echo "make install-arch      -    Install all the dependencies on arch-based platforms"
+
+
+version:
+	@echo "nos-kernel version $(KERNEL_VERSION)"
 
 
 install-debian:
