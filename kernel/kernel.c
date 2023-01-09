@@ -7,16 +7,12 @@
     This file containts the entry point for the kernel.
 */
 
+#include "kernel.h"
+
 #include "lib/stdio.h"
 #include "arch/x86/interrupts/idt.h"
 #include "arch/x86/interrupts/isr.h"
 #include "kpanic.h"
-
-#ifdef _KERNEL_VERBOSE_MODE
-#define _kernel_init_msg(msg) kputs(msg)
-#else
-#define _kernel_init_msg(msg)
-#endif
 
 
 static void _kernel_init() 
@@ -24,8 +20,12 @@ static void _kernel_init()
     k_io_init();
     x86_idt_init();
     x86_isr_init();
+	
+	_kernel_verbose_msg("kernel version: ");
+	_kernel_verbose_msg(KERNEL_VERSION);
+	_kernel_verbose_msg("\n");
 
-	_kernel_init_msg("kernel initialisation: OK\n");
+	_kernel_verbose_msg("kernel initialisation: OK\n");
 }
 
 

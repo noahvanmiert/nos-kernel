@@ -8,13 +8,13 @@
 # $@ -> Target Name
 # $^ -> Dependencies
 
-KERNEL_VERSION = 0.1.0
 
 BOOT   = boot
 BUILD  = build
 KERNEL = kernel
 
 
+KERNEL_VERSION = 0.1.0
 KERNEL_MACROS = -D _KERNEL_VERBOSE_MODE
 
 
