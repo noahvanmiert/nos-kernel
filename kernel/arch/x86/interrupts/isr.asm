@@ -283,7 +283,7 @@ x86_isr_common:
 
     push esp        ; pass pointer to stack to C
     call isr_handler
-    add esp, 4
+    add esp, 8
 
     pop eax
 

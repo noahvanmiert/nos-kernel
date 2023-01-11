@@ -12,6 +12,7 @@
 void k_io_init();
 void kputc(char value);
 void kputs(const char *value);
+void kputi(int n);
 
 void outb(uint16_t port, uint8_t value);
 uint8_t inb(uint16_t port);

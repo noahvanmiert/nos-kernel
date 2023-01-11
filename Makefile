@@ -12,7 +12,7 @@ KERNEL = kernel
 
 
 KERNEL_VERSION = 0.1.0
-KERNEL_MACROS = -D _KERNEL_VERBOSE_MODE
+KERNEL_MACROS  = -D _KERNEL_VERBOSE_MODE
 
 
 # NASM
@@ -22,7 +22,7 @@ ASM_FLAGS = -f bin
 
 # GCC
 CC       = /usr/local/i386elfgcc/bin/i386-elf-gcc
-CC_FLAGS = -ffreestanding -m32 -g -Wall -Wextra -Werror -pedantic -std=c11 $(KERNEL_MACROS)
+CC_FLAGS = -ffreestanding -m32 -g -Wall -Wextra -Werror -std=c11 $(KERNEL_MACROS)
 
 
 # LD
@@ -42,7 +42,8 @@ QEMU_MEMORY_SIZE = 512M
 X86_INTERRUPTS = $(KERNEL)/arch/x86/interrupts
 
 
-KERNEL_OBJ_FILES = $(BUILD)/kernel.o $(BUILD)/isra.o $(BUILD)/isr.o $(BUILD)/vga_driver.o  $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(BUILD)/idt.o $(BUILD)/idta.o
+KERNEL_OBJ_FILES = $(BUILD)/kernel.o $(BUILD)/isra.o $(BUILD)/isr.o $(BUILD)/vga_driver.o  $(BUILD)/string.o $(BUILD)/stdio.o $(BUILD)/kpanic.o $(BUILD)/idt.o $(BUILD)/idta.o\
+				   $(BUILD)/irq.o $(BUILD)/irqa.o
 
 
 all: $(BUILD) $(KERNEL_OBJ_FILES) $(BUILD)/boot.bin
@@ -81,6 +82,14 @@ $(BUILD)/idt.o: $(X86_INTERRUPTS)/idt.c
 
 
 $(BUILD)/idta.o: $(X86_INTERRUPTS)/idt.asm
+	$(ASM) -felf $^ -o $@
+
+
+$(BUILD)/irq.o: $(X86_INTERRUPTS)/irq.c
+	$(CC) $(CC_FLAGS) -c $^ -o $@
+
+
+$(BUILD)/irqa.o: $(X86_INTERRUPTS)/irq.asm
 	$(ASM) -felf $^ -o $@
 
 

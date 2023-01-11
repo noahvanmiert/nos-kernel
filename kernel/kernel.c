@@ -8,6 +8,7 @@
 #include "lib/stdio.h"
 #include "arch/x86/interrupts/idt.h"
 #include "arch/x86/interrupts/isr.h"
+#include "arch/x86/interrupts/irq.h"
 #include "kpanic.h"
 
 
@@ -16,6 +17,9 @@ static void _kernel_init()
     k_io_init();
     x86_idt_init();
     x86_isr_init();
+	x86_irq_init();
+
+	__asm__ ("sti");
 	
 	_kernel_verbose_msg("kernel version: ");
 	_kernel_verbose_msg(KERNEL_VERSION);
@@ -27,7 +31,7 @@ static void _kernel_init()
 
 extern int main() {
     _kernel_init();
- 
+	
     kputs("Welcome to nos-os!\n");
 
 	return 0;

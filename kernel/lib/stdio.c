@@ -49,6 +49,58 @@ void kputs(const char *value)
 }
 
 
+const char *reverse(const char *str, char *buffer, int len)
+{
+	int i;
+	for (i = 0; i <= len; i++){
+		buffer[i] = str[len - i];
+	}
+	buffer[i] = '\0';
+	return buffer;
+}
+
+char toStringRes[128];
+
+
+void kputi(int n)
+{
+	
+	char* buffer = toStringRes;
+	int base = 10;
+	int m = n;
+	int i = 0;
+    
+    if(n < 0){                 // Negative integers
+        m = -n;
+    }
+	
+    while(m != 0){
+		buffer[i] = (char)((m % base)+ (m % base > 9 ? 55 : 48));
+		m = m / base;
+		i++;
+	}
+    
+    if(n < 0){
+        buffer[i] = '-';
+        i++;
+    }
+    
+    if(n == 0){
+        buffer[i] = '0';
+        i++;
+    }
+	
+	buffer[i] = '\0';
+	char revBuf[128];
+	//asm volatile("1: jmp 1b");
+	if (n<10){
+	    kputs("0");
+	    kputs(reverse(buffer, revBuf, i-1));
+	} else {
+	kputs(reverse(buffer, revBuf, i-1));}
+}
+
+
 /*
     outb() - Sends a byte to a given
     port.

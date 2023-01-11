@@ -11,10 +11,10 @@
 
 
 struct x86_Registers {
-	uint32_t edi, esi, ebp, kern_esp, ebx, edx, ecx, eax;
-	uint32_t gs, fs, es, ds;
-	uint32_t eip, cs, interrupt, esp, ss;
-	uint32_t eflags, error;
+	unsigned int gs, fs, es, ds;
+	unsigned int edi, esi, ebp, ebx, edx, ecx, eax;
+	unsigned int error, interrupt;
+	unsigned int  eip, cs, eflags, useresp, ss;
 } __PACKED__;
 
 
